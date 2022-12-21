@@ -1,6 +1,6 @@
 # Unoserver Docker Image
 
-To create a Docker image for unoserver
+Docker image for unoserver
 
 ## The environment
 
@@ -28,11 +28,11 @@ This Docker image uses Alpine Linux as base image and provides:
 
 Just run:
 
-    docker run -it -v <your directory>:/data/ unoserver/unoserver-docker
+    docker run -it -v <your directory>:/data/ ghcr.io/unoconv/unoserver-docker
 
 or to convert directly:
 
-    docker run -it -v <your directory>:/data/ unoserver/unoserver-docker unoconvert /data/document.docx /data/document.pdf
+    docker run -it -v <your directory>:/data/ ghcr.io/unoconv/unoserver-docker unoconvert /data/document.docx /data/document.pdf
 
 Docker maps your directory with /data directory in the container.
 
