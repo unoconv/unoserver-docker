@@ -1,4 +1,4 @@
-FROM alpine:3.17.0
+FROM alpine:3.17.3
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
