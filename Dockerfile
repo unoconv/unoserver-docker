@@ -57,8 +57,7 @@ ARG PATH_SP=/usr/lib/python3.10/site-packages
 
 RUN \
     # copy unohelper.py
-    cp "$PATH_LO"/unohelper.py "$PATH_SP"/  && \
-
+    cp "$PATH_LO/unohelper.py" "$PATH_SP/"  && \
     # prefix path to uno.py
     echo -e "\
 import sys, os \n\
@@ -83,4 +82,4 @@ ENV HOME="/home/worker"
 
 VOLUME ["/data"]
 
-ENTRYPOINT ["/config/entrypoint.sh"]
+ENTRYPOINT ["sh", "/config/entrypoint.sh"]
