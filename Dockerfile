@@ -1,4 +1,4 @@
-FROM alpine:3.17.3
+FROM alpine:3.18.0
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
@@ -40,7 +40,7 @@ RUN rm $(which wget) && \
     rm -rf /var/cache/apk/* /tmp/*
 
 # renovate: datasource=repology depName=temurin-17-jdk versioning=loose
-ARG VERSION_ADOPTIUM_TEMURIN="17.0.5_p8-r0"
+ARG VERSION_ADOPTIUM_TEMURIN="17.0.7_p7-r0"
 
 # install Eclipse Temurin JDK
 RUN curl https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk -o /etc/apk/keys/adoptium.rsa.pub && \
@@ -49,24 +49,6 @@ RUN curl https://packages.adoptium.net/artifactory/api/security/keypair/public/r
 
 # https://github.com/unoconv/unoserver/
 RUN pip install -U unoserver
-
-# FIX: pyuno path not set  (https://gitlab.alpinelinux.org/alpine/aports/-/issues/13359)
-# define path
-ARG PATH_LO=/usr/lib/libreoffice/program
-ARG PATH_SP=/usr/lib/python3.10/site-packages
-
-RUN \
-    # copy unohelper.py
-    cp "$PATH_LO"/unohelper.py "$PATH_SP"/  && \
-
-    # prefix path to uno.py
-    echo -e "\
-import sys, os \n\
-sys.path.append('/usr/lib/libreoffice/program') \n\
-os.putenv('URE_BOOTSTRAP', 'vnd.sun.star.pathname:/usr/lib/libreoffice/program/fundamentalrc')\
-" > "$PATH_SP"/uno.py  && \
-    # copy the original's content
-    cat "$PATH_LO"/uno.py >> "$PATH_SP"/uno.py
 
 # setup supervisor
 COPY --chown=${UID}:${GID} ${BUILD_CONTEXT}/supervisor /
