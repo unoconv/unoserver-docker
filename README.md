@@ -40,6 +40,11 @@ You might need to add the option `:z` or `:Z` like `<your directory>:/data/:z` o
 
 After you start the container, you can use [unoconvert](https://github.com/unoconv/unoserver#unoconvert) command to convert documents using LibreOffice.
 
+## FAQ
+
+Q. Why do I get an error an error during when converting is writing/exporting to file?
+
+A. It's very likely that you haven't given the container write permission to mounted data directory. See: https://github.com/unoconv/unoserver-docker/issues/44
 
 ## How to contribute / do it yourself?
 
