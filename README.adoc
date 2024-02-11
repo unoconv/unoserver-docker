@@ -52,7 +52,7 @@ You might need to add the option `:z` or `:Z` like `<your directory>:/data/:z` o
 
 [source,bash]
 ----
-docker run -p 2003:2003 ghcr.io/unoconv/unoserver-docker unoconvert /data/document.docx /data/document.pdf
+docker run -p 2003:2003 ghcr.io/unoconv/unoserver-docker
 ----
 
 After you start the container, you can use link:https://github.com/unoconv/unoserver#unoconvert[unoconvert] command to convert documents using LibreOffice.
