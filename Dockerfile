@@ -1,8 +1,9 @@
-FROM alpine:3.18.5
+FROM alpine:3.19.1
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
 ARG GID=worker
+ARG VERSION_UNOSERVER=2.0.1
 
 LABEL org.opencontainers.image.title="unoserver-docker"
 LABEL org.opencontainers.image.description="Custom Docker Image that contains unoserver, LibreOffice and major set of fonts for file format conversions"
@@ -12,6 +13,8 @@ LABEL org.opencontainers.image.source="https://github.com/unoconv/unoserver-dock
 LABEL org.opencontainers.image.url="https://github.com/unoconv/unoserver-docker"
 
 WORKDIR /
+
+RUN echo `id`
 
 RUN addgroup -S ${GID} && adduser -S ${UID} -G ${GID}
 
@@ -36,19 +39,18 @@ RUN apk add --no-cache \
     fontconfig && \
     fc-cache -f
 
-RUN rm $(which wget) && \
-    rm -rf /var/cache/apk/* /tmp/*
-
-# renovate: datasource=repology depName=temurin-17-jdk versioning=loose
-ARG VERSION_ADOPTIUM_TEMURIN="17.0.7_p7-r0"
+ARG VERSION_ADOPTIUM_TEMURIN="21.0.2_p13-r0"
 
 # install Eclipse Temurin JDK
 RUN curl https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk -o /etc/apk/keys/adoptium.rsa.pub && \
     echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
-    apk update && apk add temurin-17-jdk=${VERSION_ADOPTIUM_TEMURIN}
+    apk update && apk add --no-cache temurin-21-jdk=${VERSION_ADOPTIUM_TEMURIN}
+
+RUN rm $(which wget) && \
+    rm -rf /var/cache/apk/* /tmp/*
 
 # https://github.com/unoconv/unoserver/
-RUN pip install -U unoserver
+RUN pip install --break-system-packages -U unoserver==${VERSION_UNOSERVER}
 
 # setup supervisor
 COPY --chown=${UID}:${GID} ${BUILD_CONTEXT}/supervisor /
