@@ -25,14 +25,20 @@ This Docker image uses Alpine Linux as a base image and provides:
 
 == How to use it
 
+=== In interactive mode
+
 Just run:
 
+[source,bash]
 ----
 docker run -it -v <your directory>:/data/ ghcr.io/unoconv/unoserver-docker
 ----
 
-or to convert directly:
+After you start the container, you can use link:https://github.com/unoconv/unoserver#unoconvert[unoconvert] command to convert documents using LibreOffice.
 
+or to convert directly using unoconvert:
+
+[source,bash]
 ----
 docker run -it -v <your directory>:/data/ ghcr.io/unoconv/unoserver-docker unoconvert /data/document.docx /data/document.pdf
 ----
@@ -41,8 +47,22 @@ Docker maps your directory with /data directory in the container.
 
 You might need to add the option `:z` or `:Z` like `<your directory>:/data/:z` or `<your directory>:/data/:Z` if you are using SELinux. See link:https://docs.docker.com/storage/bind-mounts/#configure-the-selinux-label[Docker docs] or link:https://docs.podman.io/en/latest/markdown/podman-run.1.html#volume-v-source-volume-host-dir-container-dir-options[Podman docs].
 
+
+=== In non-interactive (remote) mode
+
+[source,bash]
+----
+docker run -p 2003:2003 ghcr.io/unoconv/unoserver-docker unoconvert /data/document.docx /data/document.pdf
+----
+
 After you start the container, you can use link:https://github.com/unoconv/unoserver#unoconvert[unoconvert] command to convert documents using LibreOffice.
 
+NOTE: You must use `--host-location` otherwise unoconvert will default to local although running unoserver in a container should be handled as remote.
+
+[source,bash]
+----
+unoconvert --host-location remote example.docx x2.pdfdocker
+----
 == FAQ
 
 Q. Why do I get an error during when converting is writing/exporting to file?

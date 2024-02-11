@@ -60,6 +60,5 @@ WORKDIR /home/worker
 ENV HOME="/home/worker"
 
 VOLUME ["/data"]
-EXPOSE 2002
 EXPOSE 2003
 ENTRYPOINT ["/entrypoint.sh"]
