@@ -14,8 +14,6 @@ LABEL org.opencontainers.image.url="https://github.com/unoconv/unoserver-docker"
 
 WORKDIR /
 
-RUN echo `id`
-
 RUN addgroup -S ${GID} && adduser -S ${UID} -G ${GID}
 
 RUN apk add --no-cache \
@@ -52,8 +50,6 @@ RUN chmod +x entrypoint.sh && \
 #    mkdir -p /var/run && \
     chown -R ${UID}:0 /run && \
     chmod -R g=u /run
-
-RUN tree
 
 USER ${UID}
 WORKDIR /home/worker
