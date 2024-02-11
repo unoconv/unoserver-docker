@@ -45,18 +45,21 @@ RUN rm -rf /var/cache/apk/* /tmp/*
 RUN pip install --break-system-packages -U unoserver==${VERSION_UNOSERVER}
 
 # setup supervisor
-COPY --chown=${UID}:${GID} ${BUILD_CONTEXT}/supervisor /
-RUN chmod +x /config/entrypoint.sh && \
+COPY --chown=${UID}:${GID} ${BUILD_CONTEXT} /
+RUN chmod +x entrypoint.sh && \
 #    mkdir -p /var/log/supervisor && \
 #    chown ${UID}:${GID} /var/log/supervisor && \
 #    mkdir -p /var/run && \
     chown -R ${UID}:0 /run && \
     chmod -R g=u /run
 
+RUN tree
+
 USER ${UID}
 WORKDIR /home/worker
 ENV HOME="/home/worker"
 
 VOLUME ["/data"]
+EXPOSE 2002
 EXPOSE 2003
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
