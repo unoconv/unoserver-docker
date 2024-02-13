@@ -8,7 +8,7 @@ ARG VERSION_UNOSERVER=2.0.1
 LABEL org.opencontainers.image.title="unoserver-docker"
 LABEL org.opencontainers.image.description="Custom Docker Image that contains unoserver, LibreOffice and major set of fonts for file format conversions"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.documentation="https://github.com/unoconv/unoserver-docker/blob/master/README.md"
+LABEL org.opencontainers.image.documentation="https://github.com/unoconv/unoserver-docker/blob/master/README.adoc"
 LABEL org.opencontainers.image.source="https://github.com/unoconv/unoserver-docker"
 LABEL org.opencontainers.image.url="https://github.com/unoconv/unoserver-docker"
 
