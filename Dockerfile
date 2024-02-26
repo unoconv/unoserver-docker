@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21.0.2_13-jdk-alpine
+FROM --platform=$BUILDPLATFORM eclipse-temurin:21.0.2_13-jdk-alpine
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
@@ -6,9 +6,9 @@ ARG GID=worker
 ARG VERSION_UNOSERVER=2.0.1
 
 LABEL org.opencontainers.image.title="unoserver-docker"
-LABEL org.opencontainers.image.description="Custom Docker Image that contains unoserver, LibreOffice and major set of fonts for file format conversions"
+LABEL org.opencontainers.image.description="Container image that contains unoserver and LibreOffice including large set of fonts for file format conversions"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.documentation="https://github.com/unoconv/unoserver-docker/blob/master/README.adoc"
+LABEL org.opencontainers.image.documentation="https://github.com/unoconv/unoserver-docker/blob/main/README.adoc"
 LABEL org.opencontainers.image.source="https://github.com/unoconv/unoserver-docker"
 LABEL org.opencontainers.image.url="https://github.com/unoconv/unoserver-docker"
 
