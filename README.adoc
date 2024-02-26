@@ -1,10 +1,10 @@
-= Unoserver Docker Image
+= Unoserver Container Image
 
-Docker image for unoserver
+Container image for unoserver
 
 == The environment
 
-This Docker image uses Alpine Linux as a base image and provides:
+This Container image uses Alpine Linux as a base image and provides:
 
 * link:https://www.libreoffice.org/[LibreOffice]
 * link:https://github.com/unoconv/unoserver[unoserver]
@@ -24,6 +24,8 @@ This Docker image uses Alpine Linux as a base image and provides:
   - ttf-opensans  
 
 == How to use it
+
+NOTE: The `docker` can normally be replaced with `podman` as well.
 
 === In interactive mode
 
@@ -80,6 +82,7 @@ You need the following tools:
 
 === How to build
 
+[source,bash]
 ----
 docker build .
 ----
