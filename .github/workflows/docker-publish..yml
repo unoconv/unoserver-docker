@@ -81,7 +81,8 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: mode=max
           sbom: true
-          outputs: type=image,name=target,annotation-index.org.opencontainers.image.description="Custom Multi-Arch Container Image that contains unoserver, LibreOffice and major set of fonts for file format conversions"
+          outputs: |
+            type=image,name=target,annotation-index.org.opencontainers.image.title=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.title'] }},annotation-index.org.opencontainers.image.description=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.description'] }},annotation-index.org.opencontainers.image.licenses=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.licenses'] }},annotation-index.org.opencontainers.image.documentation=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.documentation'] }},annotation-index.org.opencontainers.image.source=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.source'] }},annotation-index.org.opencontainers.image.url=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.url'] }}
           # BuildKit doesn't preserve cache mounts in the GitHub Actions cache by default
           # see: https://docs.docker.com/build/ci/github-actions/cache/#cache-mounts
           # cache-from: type=gha
