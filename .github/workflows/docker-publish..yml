@@ -33,7 +33,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-
       - name: Cat Dockerfile
         run: cat Dockerfile
 
@@ -82,6 +81,7 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: mode=max
           sbom: true
+          outputs: type=image,name=target,annotation-index.org.opencontainers.image.description="Custom Multi-Arch Container Image that contains unoserver, LibreOffice and major set of fonts for file format conversions"
           # BuildKit doesn't preserve cache mounts in the GitHub Actions cache by default
           # see: https://docs.docker.com/build/ci/github-actions/cache/#cache-mounts
           # cache-from: type=gha
