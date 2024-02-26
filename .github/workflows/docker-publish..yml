@@ -28,8 +28,6 @@ jobs:
         platform:
           - linux/amd64
           - linux/arm64
-          # - linux/arm/v6
-          # - linux/arm/v7
 
     steps:
       - name: Checkout repository
@@ -45,9 +43,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          flavor: |
-            latest=auto          
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}   
           tags: |
             type=schedule
             type=ref,event=branch
@@ -94,11 +90,11 @@ jobs:
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
-        #if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: sigstore/cosign-installer@v3.4.0
 
       - name: Sign the images with GitHub OIDC Token
-        #if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v')
         env:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
           TAGS: ${{ steps.meta.outputs.tags }}
