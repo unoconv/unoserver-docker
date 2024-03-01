@@ -139,7 +139,8 @@ jobs:
           echo $ANNOTATION_TAGS >> "debug.txt"
           echo >> "debug.txt"  # New line
           cmd="docker buildx imagetools create $IMAGE_TAGS $ANNOTATION_TAGS $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)"
-          echo $cmd >> debug.txt
+          echo "$cmd" >> debug.txt
+          $cmd
   
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
