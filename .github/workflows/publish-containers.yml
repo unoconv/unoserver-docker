@@ -134,9 +134,17 @@ jobs:
         run: |
           export IMAGE_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")')
           export ANNOTATIONS_TAG=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")')
-          echo $IMAGE_TAGS
-          echo $ANNOTATIONS_TAG
-          docker buildx imagetools create $IMAGE_TAGS $ANNOTATIONS_TAG $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
+          echo $IMAGE_TAGS > "debug.txt"
+          echo >> "debug.txt"  # New line
+          echo $ANNOTATIONS_TAG > "debug.txt"
+          echo >> "debug.txt"  # New line          
+          docker buildx imagetools create $IMAGE_TAGS $ANNOTATIONS_TAG $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *) | tee -a debug.txt
+
+      - uses: actions/upload-artifact@v3
+            name: Upload Artifact
+            with:
+              name: debug
+              path: "debug.txt"
 
       - name: Inspect image
         run: |
