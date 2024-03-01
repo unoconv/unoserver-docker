@@ -5,7 +5,7 @@ on:
     types:
       - created
   push:
-    branches: feature/fix_build_merge_
+    branches: feature/fix_merge
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
