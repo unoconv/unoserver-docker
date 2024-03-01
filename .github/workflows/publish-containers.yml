@@ -138,6 +138,8 @@ jobs:
           echo >> "/tmp/debug.txt"  # New line
           echo $ANNOTATION_TAGS >> "/tmp/debug.txt"
           echo >> "/tmp/debug.txt"  # New line
+
+          export ANNOTATIONS_TAGS2='--annotation "org.opencontainers.image.description=Container image that contains unoserver and LibreOffice" --annotation "org.opencontainers.image.licenses=MIT"'
           cmd="docker buildx imagetools create $IMAGE_TAGS  $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)" # $ANNOTATION_TAGS
           echo "$cmd" >> "/tmp/debug.txt"
           $cmd
