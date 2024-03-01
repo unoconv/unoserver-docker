@@ -141,7 +141,7 @@ jobs:
           # docker buildx imagetools create $IMAGE_TAGS $ANNOTATIONS_TAG $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *) | tee -a debug.txt
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3            
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: debug
