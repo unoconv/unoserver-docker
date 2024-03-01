@@ -146,6 +146,8 @@ jobs:
         with:
           name: debug
           path: "debug.txt"
+          if-no-files-found: error
+
 
       - name: Inspect image
         run: |
