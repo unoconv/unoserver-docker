@@ -138,7 +138,7 @@ jobs:
           echo >> "/tmp/debug.txt"  # New line
           echo $ANNOTATION_TAGS >> "/tmp/debug.txt"
           echo >> "/tmp/debug.txt"  # New line
-          cmd="docker buildx imagetools create $IMAGE_TAGS $ANNOTATION_TAGS $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)"
+          cmd="docker buildx imagetools create $IMAGE_TAGS  $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)" # $ANNOTATION_TAGS
           echo "$cmd" >> "/tmp/debug.txt"
           $cmd
   
