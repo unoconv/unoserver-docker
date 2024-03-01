@@ -137,7 +137,9 @@ jobs:
           echo $IMAGE_TAGS > "debug.txt"
           echo >> "debug.txt"  # New line
           echo $ANNOTATIONS_TAG >> "debug.txt"
-          echo >> "debug.txt"  # New line          
+          echo >> "debug.txt"  # New line
+          pwd
+          ls -l          
           # docker buildx imagetools create $IMAGE_TAGS $ANNOTATIONS_TAG $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *) | tee -a debug.txt
 
       - name: Upload Artifact
@@ -145,8 +147,9 @@ jobs:
         if: always()
         with:
           name: debug
-          path: "debug.txt"
           if-no-files-found: error
+          path: |
+            ${{ github.workspace }}/debug.txt
 
 
       - name: Inspect image
