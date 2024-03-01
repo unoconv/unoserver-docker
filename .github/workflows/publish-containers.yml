@@ -149,7 +149,7 @@ jobs:
           name: debug
           if-no-files-found: error
           path: |
-            ${{ github.workspace }}/debug.txt
+            /tmp/digests/debug.txt
 
 
       - name: Inspect image
