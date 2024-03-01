@@ -23,7 +23,7 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - linux/arm64
+          # - linux/arm64
           - linux/amd64
 
     steps:
@@ -132,7 +132,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          export IMAGE_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")')
+          export IMAGE_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("--tag " + .) | join(" ")')
           export ANNOTATION_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")')
           echo $IMAGE_TAGS > "debug.txt"
           echo >> "debug.txt"  # New line
