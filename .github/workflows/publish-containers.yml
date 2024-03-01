@@ -134,12 +134,12 @@ jobs:
         run: |
           export IMAGE_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("--tag " + .) | join(" ")')
           export ANNOTATION_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")')
-          echo $IMAGE_TAGS > "debug.txt"
-          echo >> "debug.txt"  # New line
-          echo $ANNOTATION_TAGS >> "debug.txt"
-          echo >> "debug.txt"  # New line
+          echo $IMAGE_TAGS > "/tmp/debug.txt"
+          echo >> "/tmp/debug.txt"  # New line
+          echo $ANNOTATION_TAGS >> "/tmp/debug.txt"
+          echo >> "/tmp/debug.txt"  # New line
           cmd="docker buildx imagetools create $IMAGE_TAGS $ANNOTATION_TAGS $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)"
-          echo "$cmd" >> debug.txt
+          echo "$cmd" >> "tmp/debug.txt"
           $cmd
   
       - name: Upload Artifact
@@ -149,7 +149,7 @@ jobs:
           name: debug
           if-no-files-found: error
           path: |
-            /tmp/digests/debug.txt
+            /tmp/debug.txt
 
 
       - name: Inspect image
