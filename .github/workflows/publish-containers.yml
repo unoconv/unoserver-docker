@@ -133,14 +133,14 @@ jobs:
         working-directory: /tmp/digests
         run: |
           export IMAGE_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")')
-          export ANNOTATIONS_TAG=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")')
+          export ANNOTATION_TAGS=$(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")')
           echo $IMAGE_TAGS > "debug.txt"
           echo >> "debug.txt"  # New line
-          echo $ANNOTATIONS_TAG >> "debug.txt"
+          echo $ANNOTATION_TAGS >> "debug.txt"
           echo >> "debug.txt"  # New line
           pwd
           ls -l          
-          # docker buildx imagetools create $IMAGE_TAGS $ANNOTATIONS_TAG $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *) | tee -a debug.txt
+          # docker buildx imagetools create $IMAGE_TAGS $ANNOTATION_TAGS $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *) | tee -a debug.txt
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
