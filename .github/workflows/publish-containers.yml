@@ -145,6 +145,7 @@ jobs:
           # Output content of each file and save to output.txt
           for file in $(ls $DIRECTORY_PATH); do
             echo "Contents of $DIRECTORY_PATH/$file:" >> output.txt
+            echo "$DIRECTORY_PATH/$file:" >> output.txt
             cat $DIRECTORY_PATH/$file >> output.txt
             echo "\n\n" >> output.txt
           done
