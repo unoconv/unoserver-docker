@@ -35,7 +35,7 @@ jobs:
 
       - name: Extract container metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -130,6 +130,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
+          ls -la
           docker buildx imagetools create \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
