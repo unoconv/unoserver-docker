@@ -63,7 +63,7 @@ NOTE: You must use `--host-location` otherwise unoconvert will default to local 
 
 [source,bash]
 ----
-unoconvert --host-location remote example.docx x2.pdfdocker
+unoconvert --host-location remote example.docx example.pdf
 ----
 == FAQ
 
