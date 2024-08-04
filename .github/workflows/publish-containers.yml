@@ -131,6 +131,7 @@ jobs:
         working-directory: /tmp/digests
         run: |
           ls -la
+          echo $DOCKER_METADATA_OUTPUT_JSON
           docker buildx imagetools create \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
