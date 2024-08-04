@@ -137,7 +137,7 @@ jobs:
           echo "Listing files in the directory and outputting their contents:"
 
           # Define the directory path
-          DIRECTORY_PATH=your-directory-path
+          DIRECTORY_PATH=.
 
           # List files in the directory and save to file_list.txt
           ls -la $DIRECTORY_PATH > file_list.txt
