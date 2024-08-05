@@ -70,7 +70,7 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: mode=max
           sbom: true
-          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,annotation-index.org.opencontainers.image.description=Container image that contains unoserver and libreoffice incl a large set of fonts for file format conversions
+          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,"annotation-index.org.opencontainers.image.description=Container image that contains unoserver and LibreOffice incl a large set of fonts for file format conversions"
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
