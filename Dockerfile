@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM eclipse-temurin:21.0.2_13-jdk-alpine
+FROM --platform=$BUILDPLATFORM eclipse-temurin:22.0.1_8-jdk-alpine
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
@@ -45,9 +45,9 @@ RUN pip install --break-system-packages -U unoserver==${VERSION_UNOSERVER}
 # setup supervisor
 COPY --chown=${UID}:${GID} ${BUILD_CONTEXT} /
 RUN chmod +x entrypoint.sh && \
-#    mkdir -p /var/log/supervisor && \
-#    chown ${UID}:${GID} /var/log/supervisor && \
-#    mkdir -p /var/run && \
+    #    mkdir -p /var/log/supervisor && \
+    #    chown ${UID}:${GID} /var/log/supervisor && \
+    #    mkdir -p /var/run && \
     chown -R ${UID}:0 /run && \
     chmod -R g=u /run
 

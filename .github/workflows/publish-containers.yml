@@ -116,7 +116,7 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
           annotations: |
-            org.opencontainers.image.description=Container image that contains unoserver and libreoffice including large set of fonts for file format conversions
+            org.opencontainers.image.description="Container image that contains unoserver and LibreOffice including large set of fonts for file format conversions"
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.source=https://github.com/unoconv/unoserver-docker
         env:
@@ -155,10 +155,19 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
+          set +ex
           docker buildx imagetools create \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
             $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
+
+      # - name: Create manifest list and push
+      #   working-directory: /tmp/digests
+      #   run: |
+      #     docker buildx imagetools create \
+      #       $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
+      #       $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
+      #       $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
 
       - name: Inspect image
         run: |
