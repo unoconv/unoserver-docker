@@ -129,29 +129,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Debug info 1
-        working-directory: /tmp/digests
-        run: ls -la
-
-      - name: Debug info 2
-        working-directory: /tmp/digests
-        run: |
-          echo "Listing files in the directory and outputting their contents:"
-
-          # Define the directory path
-          DIRECTORY_PATH=.
-
-          # List files in the directory and save to file_list.txt
-          ls -la $DIRECTORY_PATH > file_list.txt
-
-          # Output content of each file and save to output.txt
-          for file in $(ls $DIRECTORY_PATH); do
-            echo "Contents of $DIRECTORY_PATH/$file:" >> output.txt
-            echo "$DIRECTORY_PATH/$file:" >> output.txt
-            cat $DIRECTORY_PATH/$file >> output.txt
-            echo "\n\n" >> output.txt
-          done
-
       - name: Create manifest list and push
         working-directory: /tmp/digests
         env:
