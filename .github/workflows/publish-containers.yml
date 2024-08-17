@@ -135,9 +135,12 @@ jobs:
           ACTIONS_STEP_DEBUG: true
         run: |
           set -ex
+          echo $DOCKER_METADATA_OUTPUT_JSON
+          echo $DOCKER_METADATA_OUTPUT_JSON | sed 's/\\"//g'|jq
+          export DOCKER_METADATA_OUTPUT_JSON=$(echo $DOCKER_METADATA_OUTPUT_JSON | sed 's/\\"//g'|jq)
           docker buildx imagetools create \
             $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
-            $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
+            $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
             $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
 
       # - name: Create manifest list and push
