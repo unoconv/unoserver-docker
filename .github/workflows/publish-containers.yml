@@ -70,7 +70,8 @@ jobs:
           annotations: ${{ steps.meta.outputs.annotations }}
           provenance: mode=max
           sbom: true
-          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,annotation-index.org.opencontainers.image.description="Container image that contains unoserver and LibreOffice including a large set of fonts for file format conversions"
+          outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true
+          # outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,"annotation-index.org.opencontainers.image.description=Container image that contains unoserver and LibreOffice including a large set of fonts for file format conversions"
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
@@ -129,27 +130,27 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create manifest list and push
-        working-directory: /tmp/digests
-        env:
-          ACTIONS_STEP_DEBUG: true
-          # set -ex
-        run: |
-          # echo $DOCKER_METADATA_OUTPUT_JSON | jq
-          # echo $DOCKER_METADATA_OUTPUT_JSON | sed 's/\\"//g'|jq 
-          # export DOCKER_METADATA_OUTPUT_JSON=$(echo $DOCKER_METADATA_OUTPUT_JSON | sed 's/\\"//g'|jq)
-          docker buildx imagetools create \
-            $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
-            $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
-            $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
-
       # - name: Create manifest list and push
       #   working-directory: /tmp/digests
+      #   env:
+      #     ACTIONS_STEP_DEBUG: true
+      #     # set -ex
       #   run: |
+      #     # echo $DOCKER_METADATA_OUTPUT_JSON | jq
+      #     # echo $DOCKER_METADATA_OUTPUT_JSON | sed 's/\\"//g'|jq
+      #     # export DOCKER_METADATA_OUTPUT_JSON=$(echo $DOCKER_METADATA_OUTPUT_JSON | sed 's/\\"//g'|jq)
       #     docker buildx imagetools create \
       #       $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
-      #       $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
+      #       $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
       #       $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
+
+      - name: Create manifest list and push
+        working-directory: /tmp/digests
+        run: |
+          docker buildx imagetools create \
+            $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -cr '.tags | map("-t " + .) | join(" ")') \
+            $(echo $DOCKER_METADATA_OUTPUT_JSON | jq -r '.annotations | map("--annotation \"" + . + "\"") | join(" ")') \
+            $(printf '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}@sha256:%s ' *)
 
       - name: Inspect image
         run: |
