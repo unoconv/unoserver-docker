@@ -71,7 +71,7 @@ jobs:
           provenance: mode=max
           sbom: true
           outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true
-          # outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,"annotation-index.org.opencontainers.image.description=Container image that contains unoserver and LibreOffice including a large set of fonts for file format conversions"
+          # outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,"annotation-index.org.opencontainers.image.description=Container image that contains unoserver and libreoffice including a large set of fonts for file format conversions"
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
@@ -117,7 +117,7 @@ jobs:
             type=ref,event=pr
             type=semver,pattern={{version}}
           annotations: |
-            org.opencontainers.image.description="Container image that contains unoserver and LibreOffice including large set of fonts for file format conversions"
+            org.opencontainers.image.description="Container image that contains unoserver and libreoffice including large set of fonts for file format conversions"
             org.opencontainers.image.licenses=MIT
             org.opencontainers.image.source=https://github.com/unoconv/unoserver-docker
         env:

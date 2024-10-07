@@ -6,7 +6,7 @@ ARG GID=worker
 ARG VERSION_UNOSERVER=2.2.2
 
 LABEL org.opencontainers.image.title="unoserver-docker"
-LABEL org.opencontainers.image.description="Container image that contains unoserver and LibreOffice including large set of fonts for file format conversions"
+LABEL org.opencontainers.image.description="Container image that contains unoserver and libreoffice including large set of fonts for file format conversions"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.documentation="https://github.com/unoconv/unoserver-docker/blob/main/README.adoc"
 LABEL org.opencontainers.image.source="https://github.com/unoconv/unoserver-docker"
