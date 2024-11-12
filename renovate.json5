@@ -1,0 +1,13 @@
+{
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": [
+        "# renovate: pypi: unoserver\\nARG VERSION_UNOSERVER=(?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "pypi",
+      "depNameTemplate": "unoserver",
+      "versioningTemplate": "pep440"
+    }
+  ]
+}
