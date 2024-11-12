@@ -3,11 +3,17 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "# renovate: pypi: unoserver\\nARG VERSION_UNOSERVER=(?<currentValue>.*)"
+        "# renovate: pypi: unoserver.*\\sARG VERSION_UNOSERVER=(?<currentValue>.*)"
       ],
       "datasourceTemplate": "pypi",
       "depNameTemplate": "unoserver",
-      "versioningTemplate": "pep440"
+      "versioningTemplate": "pep440",
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "branch",
+      "major": {
+        "automerge": false
+      }
     }
   ]
 }
