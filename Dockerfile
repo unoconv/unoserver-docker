@@ -3,6 +3,7 @@ FROM --platform=$BUILDPLATFORM eclipse-temurin:23.0.1_11-jdk-alpine
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
 ARG GID=worker
+# renovate: pypi: unoserver
 ARG VERSION_UNOSERVER=2.2.2
 
 LABEL org.opencontainers.image.title="unoserver-docker"
