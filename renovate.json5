@@ -7,13 +7,17 @@
       ],
       "datasourceTemplate": "pypi",
       "depNameTemplate": "unoserver",
-      "versioningTemplate": "pep440",
+      "versioningTemplate": "pep440"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": ["pypi"],
+      "matchPackageNames": ["unoserver"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "branch",
-      "major": {
-        "automerge": false
-      }
+      "matchUpdateTypes": ["minor", "patch"]
     }
   ]
 }
