@@ -49,7 +49,7 @@ jobs:
       # Build image with Buildx (don't push)
       - name: Build image
         id: build-and-push
-        uses: docker/build-push-action@v6.13.0
+        uses: docker/build-push-action@v6.15.0
         with:
           context: .
           platforms: ${{ matrix.platform }}
