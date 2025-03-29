@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM eclipse-temurin:24_36-jdk-alpine
+FROM --platform=$BUILDPLATFORM eclipse-temurin:24-jdk-alpine
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
