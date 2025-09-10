@@ -4,7 +4,7 @@ ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
 ARG GID=worker
 # renovate: pypi: unoserver
-ARG VERSION_UNOSERVER=3.2
+ARG VERSION_UNOSERVER=3.3.2
 
 LABEL org.opencontainers.image.title="unoserver-docker"
 LABEL org.opencontainers.image.description="Container image that contains unoserver and libreoffice including large set of fonts for file format conversions"
