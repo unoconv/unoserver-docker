@@ -1,10 +1,10 @@
-FROM eclipse-temurin:24.0.1_9-jdk-alpine-3.21
+FROM eclipse-temurin:25.0.2_10-jdk-alpine-3.23
 
 ARG BUILD_CONTEXT="build-context"
 ARG UID=worker
 ARG GID=worker
 # renovate: pypi: unoserver
-ARG VERSION_UNOSERVER=3.4
+ARG VERSION_UNOSERVER=3.6
 
 LABEL org.opencontainers.image.title="unoserver-docker"
 LABEL org.opencontainers.image.description="Container image that contains unoserver and libreoffice including large set of fonts for file format conversions"
